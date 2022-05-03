@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Event;
 use App\Repositories\EventRepository;
 use Exception;
 
@@ -12,7 +13,7 @@ class EventService
     protected $eventRepository;
 
     /**
-     * BaseService constructor.
+     * EventService constructor.
      * @param EventRepository $EventRepository Model's Event Repository
      * @throws Exception
      */
@@ -27,6 +28,17 @@ class EventService
     public function all()
     {
         return $this->eventRepository->all()->get();
+
+    }
+
+    public function store($arr)
+    {
+
+        $returnValue = Event::create(
+            $this->eventRepository->store($arr)
+        );
+
+        return $returnValue;
 
     }
 }
