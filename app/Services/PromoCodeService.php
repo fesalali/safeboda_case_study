@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\PromoCode;
+use App\Models\PromoCodeDefinition;
 use App\Repositories\PromoCodeRepository;
 use Exception;
 use PhpParser\ErrorHandler\Collecting;
@@ -28,8 +29,39 @@ class PromoCodeService
 
     public function all()
     {
-        return $this->promoCodeRepository->all()->get();
+        return $this->promoCodeRepository->getRecords()->get();
+    }
 
+
+    public function getActive()
+    {
+
+        return $this->promoCodeRepository->getRecords([
+            PromoCodeDefinition::IS_ACTIVE => 1
+        ])->get();
+    }
+
+    public function getInActive()
+    {
+
+        return $this->promoCodeRepository->getRecords([
+            PromoCodeDefinition::IS_ACTIVE => 0
+        ])->get();
+    }
+
+    public function active(PromoCode $promoCode)
+    {
+        $promoCode=$this->promoCodeRepository->active($promoCode);
+        $promoCode->save();
+        return $promoCode;
+    }
+
+
+    public function inActive(PromoCode $promoCode)
+    {
+        $promoCode=$this->promoCodeRepository->inActive($promoCode);
+        $promoCode->save();
+        return $promoCode;
     }
 
     public function store($arr)
@@ -40,6 +72,5 @@ class PromoCodeService
         );
 
         return $returnValue;
-
     }
 }

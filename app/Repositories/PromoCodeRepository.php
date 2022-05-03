@@ -11,13 +11,12 @@ class PromoCodeRepository
 {
 
 
-    public function all()
+    public function getRecords($arr=[])
     {
-        $querySet = PromoCode::query();
+        $querySet = PromoCode::where($arr);
         return $querySet;
     }
 
-  
 
     public function store($arr): array
     {
@@ -31,6 +30,19 @@ class PromoCodeRepository
             PromoCodeDefinition::CODE => SELF::generateCode(),
 
         ];
+    }
+
+    public function active(PromoCode $promoCode)
+    {
+        $promoCode->is_active=1;
+        return $promoCode;
+    }
+
+
+    public function inActive(PromoCode $promoCode)
+    {
+        $promoCode->is_active=0;
+        return $promoCode;
     }
 
 
