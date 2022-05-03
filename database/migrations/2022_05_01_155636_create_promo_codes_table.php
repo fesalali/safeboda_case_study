@@ -25,7 +25,6 @@ class CreatePromoCodesTable extends Migration
             $table->string("code",10)->unique();
             $table->tinyInteger('is_active')->length(1)->nullable()->default(1);
             $table->integer("available_count");
-            $table->decimal("destination");
             $table->date("expiration_date")->nullable();
             $table->timestamps();
         });

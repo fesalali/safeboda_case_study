@@ -21,7 +21,7 @@ class EventController extends BaseController
 
 
 
-      /**
+    /**
      * Display a listing of the resource.
      * @return JsonResponse
      */

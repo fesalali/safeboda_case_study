@@ -24,3 +24,9 @@ Route::prefix("events")->group(function () {
     Route::get('/', 'App\Http\Controllers\EventController@index')->name("events.index");
     Route::post('/', 'App\Http\Controllers\EventController@store')->name("events.store");
 });
+
+
+Route::prefix("promo_codes")->group(function () {
+    Route::get('/', 'App\Http\Controllers\PromoCodeController@index')->name("promo_codes.index");
+    Route::post('/', 'App\Http\Controllers\PromoCodeController@store')->name("promo_codes.store");
+});
