@@ -18,11 +18,11 @@ class PromoCodeResource extends JsonResource
     {
         return [
             PromoCodeDefinition::ID => $this->id,
-            PromoCodeDefinition::EVENT_ID => $this->event_id,
             PromoCodeDefinition::CODE => $this->code,
             PromoCodeDefinition::AVAILABLE_COUNT => $this->available_count,
             PromoCodeDefinition::IS_ACTIVE => $this->is_active,
             PromoCodeDefinition::EXPIRATION_DATE => $this->expiration_date,
+            PromoCodeDefinition::EVENT => new EventResource($this->event)
         ];
     }
 }

@@ -11,6 +11,7 @@ class PromoCodeDefinition
     const ID = "id";
     const EVENT_ID = "event_id";
     const EVENT_NAME = "event_name";
+    const EVENT = "event";
     const CODE = "code";
     const IS_ACTIVE = "is_active";
     const AVAILABLE_COUNT = "available_count";

@@ -11,4 +11,9 @@ class Event extends Model
 
     protected $fillable = ['name','lat','lon'];
 
+    public function promoCodes()
+    {
+        return $this->hasMany(PromoCode::class);
+    }
+
 }

@@ -11,4 +11,10 @@ class PromoCode extends Model
 
     protected $fillable = ['event_id','code','is_active','available_count','expiration_date'];
 
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
 }
