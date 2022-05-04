@@ -34,7 +34,7 @@ class PromoCodeController extends BaseController
             $promoCodes = $this->service->all();
             return $this->ok(PromoCodeResource::collection($promoCodes));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -49,7 +49,7 @@ class PromoCodeController extends BaseController
             $promoCodes = $this->service->getActive();
             return $this->ok(PromoCodeResource::collection($promoCodes));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -65,7 +65,7 @@ class PromoCodeController extends BaseController
             $promoCodes = $this->service->getInActive();
             return $this->ok(PromoCodeResource::collection($promoCodes));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -82,7 +82,7 @@ class PromoCodeController extends BaseController
             $promoCode = $this->service->store($request->all());
             return $this->created(new PromoCodeResource($promoCode));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -98,7 +98,7 @@ class PromoCodeController extends BaseController
             $promoCode = $this->service->active($promoCode);
             return $this->ok(new PromoCodeResource($promoCode));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -113,7 +113,7 @@ class PromoCodeController extends BaseController
             $promoCode = $this->service->inActive($promoCode);
             return $this->ok(new PromoCodeResource($promoCode));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -151,7 +151,7 @@ class PromoCodeController extends BaseController
 
             return $this->ok(new PromoCodeResource($promoCode));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 }

@@ -32,7 +32,7 @@ class EventController extends BaseController
             $events = $this->service->all();
             return $this->ok(EventResource::collection($events));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 
@@ -47,7 +47,7 @@ class EventController extends BaseController
             $event = $this->service->store($request->all());
             return $this->created(new EventResource($event));
         } catch (\Throwable $th) {
-            return $this->badRequest("Fatal Error, server error");
+            return $this->internal_error();
         }
     }
 }

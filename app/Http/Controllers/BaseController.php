@@ -32,10 +32,6 @@ class BaseController extends Controller
         return $this->ok($id, $message, null, null, 201);
     }
 
-    public function defused()
-    {
-        return $this->deleted('Defused Successfully');
-    }
 
     public function not_found($message = "The requested resource is not found")
     {
