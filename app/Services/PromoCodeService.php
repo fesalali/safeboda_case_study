@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Event;
 use App\Models\PromoCode;
 use App\Models\PromoCodeDefinition;
 use App\Repositories\PromoCodeRepository;
@@ -32,6 +33,10 @@ class PromoCodeService
         return $this->promoCodeRepository->getRecords()->get();
     }
 
+    public function getByCode($code)
+    {
+        return  $this->promoCodeRepository->getByCode($code)->first();
+    }
 
     public function getActive()
     {
@@ -51,7 +56,7 @@ class PromoCodeService
 
     public function active(PromoCode $promoCode)
     {
-        $promoCode=$this->promoCodeRepository->active($promoCode);
+        $promoCode = $this->promoCodeRepository->active($promoCode);
         $promoCode->save();
         return $promoCode;
     }
@@ -59,7 +64,7 @@ class PromoCodeService
 
     public function inActive(PromoCode $promoCode)
     {
-        $promoCode=$this->promoCodeRepository->inActive($promoCode);
+        $promoCode = $this->promoCodeRepository->inActive($promoCode);
         $promoCode->save();
         return $promoCode;
     }
@@ -72,5 +77,12 @@ class PromoCodeService
         );
 
         return $returnValue;
+    }
+
+
+    public function reduceAvailbleCount(PromoCode $promoCode): void
+    {
+        $promoCode = $this->promoCodeRepository->reduceAvailbleCount($promoCode);
+        $promoCode->save();
     }
 }

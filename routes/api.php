@@ -33,5 +33,6 @@ Route::prefix("promo_codes")->group(function () {
     Route::get('/inActive', 'App\Http\Controllers\PromoCodeController@getInActivePromoCode')->name("promo_codes.getInActivePromoCode");
     Route::put('/{promoCode}/active', 'App\Http\Controllers\PromoCodeController@active')->name("promo_codes.active");
     Route::put('/{promoCode}/inActive', 'App\Http\Controllers\PromoCodeController@inActive')->name("promo_codes.inActive");
+    Route::post('/validPromoCode', 'App\Http\Controllers\PromoCodeController@validPromoCode')->name("promo_codes.validPromoCode");
 
 });

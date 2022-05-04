@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 
 class EventController extends BaseController
 {
-     /** @var EventService */
-     
-     private $service;
+    /** @var EventService */
 
-     public function __construct(EventService $service)
-     {
-         $this->service = $service;
-     }
+    private $service;
+
+    public function __construct(EventService $service)
+    {
+        $this->service = $service;
+    }
 
 
 
@@ -25,10 +25,15 @@ class EventController extends BaseController
      * Display a listing of the resource.
      * @return JsonResponse
      */
-    public function index() : JsonResponse
+    public function index(): JsonResponse
     {
-        $events=$this->service->all();
-        return $this->ok(EventResource::collection($events));
+
+        try {
+            $events = $this->service->all();
+            return $this->ok(EventResource::collection($events));
+        } catch (\Throwable $th) {
+            return $this->badRequest("Fatal Error, server error");
+        }
     }
 
     /**
@@ -38,8 +43,11 @@ class EventController extends BaseController
      */
     public function store(EventRequest $request): JsonResponse
     {
-        $event = $this->service->store($request->all());
-        return $this->ok(new EventResource($event));
+        try {
+            $event = $this->service->store($request->all());
+            return $this->created(new EventResource($event));
+        } catch (\Throwable $th) {
+            return $this->badRequest("Fatal Error, server error");
+        }
     }
-
 }
