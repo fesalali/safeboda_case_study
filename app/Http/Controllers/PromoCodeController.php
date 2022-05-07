@@ -6,6 +6,7 @@ use App\Http\Requests\PromoCodeRequest;
 use App\Http\Requests\PromoCodeValidatRequest;
 use App\Models\PromoCode;
 use App\Services\PromoCodeService;
+use App\Traits\PromoCodeTrait;
 use App\Transformers\PromoCodeResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ class PromoCodeController extends BaseController
 {
     //
 
+    use PromoCodeTrait;
 
     /** @var PromoCodeService */
 
@@ -140,10 +142,10 @@ class PromoCodeController extends BaseController
             if (!$event)
                 return $this->ok(null, "The event is not found");
 
-            if (!$event->checkRadius($source_lat, $source_lon))
+            if (!$this->checkRadius($source_lat, $source_lon,$event->lat,$event->lon))
                 return $this->ok(null, "The location of the source is outside the radius");
 
-            if (!$event->checkRadius($destination_lat, $destination_lon))
+            if (!$this->checkRadius($destination_lat, $destination_lon,$event->lat,$event->lon))
                 return $this->ok(null, "The location of the destination is outside the radius");
 
 
