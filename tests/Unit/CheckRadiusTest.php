@@ -28,4 +28,14 @@ class CheckRadiusTest extends TestCase
 
         $this->assertTrue($is_success);
     }
+
+    public function testGetPolyLines()
+    {
+        $is_success = true;
+
+        if (is_null($this->getPolyLines("33.51334090986649", "36.273643778504486", "33.51393141342239", "36.276558284236195")))
+            $is_success = false;
+
+        $this->assertTrue($is_success);
+    }
 }
