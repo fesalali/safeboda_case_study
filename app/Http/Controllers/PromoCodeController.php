@@ -142,17 +142,19 @@ class PromoCodeController extends BaseController
             if (!$event)
                 return $this->ok(null, "The event is not found");
 
-            if (!$this->checkRadius($source_lat, $source_lon,$event->lat,$event->lon))
+            if (!$this->checkRadius($source_lat, $source_lon, $event->lat, $event->lon))
                 return $this->ok(null, "The location of the source is outside the radius");
 
-            if (!$this->checkRadius($destination_lat, $destination_lon,$event->lat,$event->lon))
+            if (!$this->checkRadius($destination_lat, $destination_lon, $event->lat, $event->lon))
                 return $this->ok(null, "The location of the destination is outside the radius");
 
 
             $this->service->reduceAvailbleCount($promoCode);
+            $polyLines = $this->getPolyLines($source_lat, $source_lon, $destination_lat, $destination_lon);
 
-            return $this->ok(new PromoCodeResource($promoCode));
+            return $this->ok(array("promoCode" => new PromoCodeResource($promoCode), "polyLines" => $polyLines));
         } catch (\Throwable $th) {
+            throw $th;
             return $this->internal_error();
         }
     }
