@@ -4,13 +4,15 @@
 -- php "^7.3|^8.1"
 
 # run it
-composer install
+-- composer install
 
 # database settings in .env file
 
+# database migrate 
+-- php artisan migrate
+
 # run project 
-php artisan migrate
-php artisan serve
+-- php artisan serve
 
 # to run test
-php artisan test
+-- php artisan test
