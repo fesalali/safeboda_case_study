@@ -9,6 +9,7 @@ composer install
 # database settings in .env file
 
 # run project 
+php artisan migrate
 php artisan serve
 
 # to run test
